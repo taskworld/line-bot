@@ -1,0 +1,26 @@
+{
+  "name": "tw-line-bot",
+  "version": "1.0.0",
+  "description": "Taskworld Line notification Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taskworld/tw-line-bot.git"
+  },
+  "author": "Backend of Taskworld",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taskworld/tw-line-bot/issues"
+  },
+  "homepage": "https://github.com/taskworld/tw-line-bot#readme",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "bluebird": "^3.5.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "lodash": "^4.17.4"
+  }
+}
