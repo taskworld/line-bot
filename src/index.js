@@ -1,39 +1,20 @@
 require('dotenv').config()
-const axios = require('axios')
 const express = require('express')
-const _ = require('lodash')
+const cors = require('cors')
+const helmet = require('helmet')
+const morgan = require('morgan')
+const Boom = require('boom')
 
 const server = express()
-const ACCESS_TOKEN = process.env.ACCESS_TOKEN
+const app = require('./app')
+const errorHandler = require('./app/error/errorhandler')
 
-server.post('/bot', (req, res) => {
-  const events = req.events
-  if (_.isEmpty(events)) res.send('404', 'no content here')
-  for (const event in events) {
-    const replyToken = event.replyToken
-    const replyUrl = 'https://api.line.me/v2/bot/message/reply'
-    const messge = event.message.text
-
-    const replyMessages = [
-      {
-        type: 'text',
-        text: messge
-      }
-    ]
-    const postFields = JSON.parse({
-      replyToken: replyToken,
-			messages: replyMessages,
-    })
-    axios.post(
-      replyUrl,
-      postFields,
-      {
-        headers: {
-          'Authorization': `Bearer ${ACCESS_TOKEN}`
-        }
-      }
-    )
-  }
-})
+server.use(cors())
+server.use(helmet())
+server.use(morgan('dev'))
+server.use('/v1', app)
+server.all('*', (req, res, next) => next(Boom.unauthorized()))
+server.use(errorHandler)
 
 server.listen(3000)
+console.log('Server start at: http://localhost:3000')

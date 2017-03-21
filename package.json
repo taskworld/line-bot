@@ -4,7 +4,8 @@
   "description": "Taskworld Line notification Bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV=development nodemon",
+    "live": "NODE_ENV=production nodemon -p 443"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,15 @@
     "eslint-plugin-standard": "^2.1.1"
   },
   "dependencies": {
-    "@google-cloud/debug-agent": "^1.0.0"
+    "axios": "^0.15.3",
+    "boom": "^4.3.0",
+    "compression": "^1.6.2",
+    "cors": "^2.8.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "helmet": "^3.5.0",
+    "line-bot-sdk": "^0.1.4",
+    "morgan": "^1.8.1",
+    "qs": "^6.4.0"
   }
 }
