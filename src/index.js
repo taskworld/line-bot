@@ -1,9 +1,9 @@
-
+//
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
-const Boom = require('boom')
+import Boom from 'boom'
 
 import App from './App'
 import ErrorHandle from './ErrorHandler'

@@ -4,8 +4,8 @@
   "description": "Taskworld Line notification Bot",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon ./src/index.js --exec babel-node",
-    "build": "NODE_ENV=production webpack"
+    "build": "babel src -d lib",
+    "dev": "NODE_ENV=development nodemon ./src/index.js --exec babel-node"
   },
   "repository": {
     "type": "git",
@@ -31,8 +31,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-node": "^4.2.1",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.1.1",
-    "webpack": "^2.2.1"
+    "eslint-plugin-standard": "^2.1.1"
   },
   "dependencies": {
     "axios": "^0.15.3",
