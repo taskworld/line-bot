@@ -1,20 +1,23 @@
-require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
-const helmet = require('helmet')
-const morgan = require('morgan')
+
+import express from 'express'
+import cors from 'cors'
+import helmet from 'helmet'
+import morgan from 'morgan'
 const Boom = require('boom')
 
+import App from './App'
+import ErrorHandle from './ErrorHandler'
+
 const server = express()
-const app = require('./app')
-const errorHandler = require('./app/error/errorhandler')
 
 server.use(cors())
 server.use(helmet())
 server.use(morgan('dev'))
-server.use('/v1', app)
-server.all('*', (req, res, next) => next(Boom.unauthorized()))
-server.use(errorHandler)
+server.use('/v1', App)
+server.all('*', (req, res, next) => next(Boom.notFound()))
+server.use(ErrorHandle)
 
 server.listen(3000)
-console.log('Server start at: http://localhost:3000')
+if (process.env.NODE_ENV === 'development') {
+  console.log('Server start at: http://localhost:3000')
+}

@@ -4,8 +4,8 @@
   "description": "Taskworld Line notification Bot",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon",
-    "live": "NODE_ENV=production nodemon -p 443"
+    "dev": "NODE_ENV=development nodemon ./src/index.js --exec babel-node",
+    "build": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -18,24 +18,31 @@
   },
   "homepage": "https://github.com/taskworld/tw-line-bot#readme",
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
     "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-2": "^6.22.0",
     "eslint": "^3.18.0",
     "eslint-config-standard": "^7.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-node": "^4.2.1",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.1.1"
+    "eslint-plugin-standard": "^2.1.1",
+    "webpack": "^2.2.1"
   },
   "dependencies": {
     "axios": "^0.15.3",
     "boom": "^4.3.0",
     "compression": "^1.6.2",
     "cors": "^2.8.1",
-    "dotenv": "^4.0.0",
+    "dotenv-webpack": "^1.4.3",
     "express": "^4.15.2",
     "helmet": "^3.5.0",
     "line-bot-sdk": "^0.1.4",
-    "morgan": "^1.8.1",
-    "qs": "^6.4.0"
+    "morgan": "^1.8.1"
   }
 }
