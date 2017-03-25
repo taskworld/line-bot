@@ -6,7 +6,7 @@ import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import Boom from 'boom'
 
-import Bot from './Bot'
+import Bot from './bot'
 
 import ErrorHandle from './ErrorHandler'
 
