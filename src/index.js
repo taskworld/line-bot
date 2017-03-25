@@ -6,16 +6,17 @@ import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import Boom from 'boom'
 
-import App from './App'
+import Bot from './Bot'
 import ErrorHandle from './ErrorHandler'
 
 const server = express()
+const router = express.Router()
 
 server.use(bodyParser.json())
 server.use(cors())
 server.use(helmet())
 server.use(morgan('dev'))
-server.use('/v1', App)
+server.use('/v1', router.post('/bot', Bot))
 server.all('*', (req, res, next) => next(Boom.notFound()))
 server.use(ErrorHandle)
 
