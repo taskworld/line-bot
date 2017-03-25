@@ -1,4 +1,5 @@
-require('dotenv').config()
+if (process.env.NODE_ENV === 'development') require('dotenv').config()
+
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
@@ -12,6 +13,7 @@ import ErrorHandle from './ErrorHandler'
 
 const server = express()
 const router = express.Router()
+const port = process.env.PORT || 3000
 
 server.use(bodyParser.json())
 server.use(cors())
@@ -24,7 +26,7 @@ server.use('/v1', [
 server.all('*', (req, res, next) => next(Boom.notFound()))
 server.use(ErrorHandle)
 
-server.listen(3000)
+server.listen(port)
 if (process.env.NODE_ENV === 'development') {
-  console.log('Server start at: http://localhost:3000')
+  console.log(`Server start at: http://localhost:${port}`)
 }
