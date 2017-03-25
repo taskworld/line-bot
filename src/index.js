@@ -7,6 +7,7 @@ import bodyParser from 'body-parser'
 import Boom from 'boom'
 
 import Bot from './Bot'
+
 import ErrorHandle from './ErrorHandler'
 
 const server = express()
