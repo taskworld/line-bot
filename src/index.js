@@ -16,7 +16,10 @@ server.use(bodyParser.json())
 server.use(cors())
 server.use(helmet())
 server.use(morgan('dev'))
-server.use('/v1', router.post('/bot', Bot))
+server.use('/v1', [
+  router.get('/ping', (req, res) => { res.status(200).json({ greeting: 'hello' }) }),
+  router.post('/bot', Bot)
+])
 server.all('*', (req, res, next) => next(Boom.notFound()))
 server.use(ErrorHandle)
 
