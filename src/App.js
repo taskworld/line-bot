@@ -1,8 +1,6 @@
 import express from 'express'
 const router = express.Router()
 
-export default [
-  router.get('/', (req, res) => {
-    res.status(200).json('fuck')
-  })
-]
+// import bot from './bot'
+
+export default router.post('/bot', bot)

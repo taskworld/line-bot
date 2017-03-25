@@ -1,8 +1,9 @@
-//
+
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import bodyParser from 'body-parser'
 import Boom from 'boom'
 
 import App from './App'
@@ -10,6 +11,7 @@ import ErrorHandle from './ErrorHandler'
 
 const server = express()
 
+server.use(bodyParser.json())
 server.use(cors())
 server.use(helmet())
 server.use(morgan('dev'))
