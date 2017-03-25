@@ -23,8 +23,8 @@ function requestValidation (req) {
   return _.isEmpty(result.error)
 }
 
-async function reply (replyToken, messages) {
-  const replyUrl = 'https://api.line.me/v2/bot/message/reply'
+async function pushMessage (replyToken, messages) {
+  const replyUrl = 'https://api.line.me/v2/bot/message/push'
   const TOKEN = process.env.ACCESS_TOKEN
   return await axios.post(
     replyUrl,
