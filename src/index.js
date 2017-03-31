@@ -1,4 +1,3 @@
-if (process.env.NODE_ENV === 'development') require('dotenv').config()
 
 import express from 'express'
 import cors from 'cors'
@@ -7,22 +6,17 @@ import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import Boom from 'boom'
 
-import Bot from './bot'
-
 import ErrorHandle from './ErrorHandler'
+import App from './App'
 
 const server = express()
-const router = express.Router()
 const port = process.env.PORT || 3000
 
 server.use(bodyParser.json())
 server.use(cors())
 server.use(helmet())
 server.use(morgan('dev'))
-server.use('/v1', [
-  router.get('/ping', (req, res) => { res.status(200).json({ greeting: 'hello' }) }),
-  router.post('/bot', Bot)
-])
+server.use('/v1', App)
 server.all('*', (req, res, next) => next(Boom.notFound()))
 server.use(ErrorHandle)
 
