@@ -3,7 +3,8 @@ import Boom from 'boom'
 import Joi from 'joi'
 import crypto from 'crypto'
 import _ from 'lodash'
-import request from 'request-promise'
+
+import { Message } from '../services'
 
 function signatureValidation (headers, body) {
   if (process.env.NODE_ENV === 'development') return true
@@ -22,9 +23,9 @@ function requestValidation (req) {
   return _.isEmpty(result.error)
 }
 
-export default (req, res, next) => {
-  if (!signatureValidation(req.headers, req.body)) throw Boom.unauthorized('invalid token')
-  if (!requestValidation(req)) throw Boom.badRequest()
+export default async (req, res, next) => {
+  if (!signatureValidation(req.headers, req.body)) next(Boom.unauthorized('invalid token'))
+  if (!requestValidation(req)) next(Boom.badRequest())
 
   const { events } = req.body
   const replyToken = events[0].replyToken
@@ -32,27 +33,13 @@ export default (req, res, next) => {
     const text = event.message.text
     return {
       'type': 'text',
-      'text': 'HELLLOW  WWWEWE ' + text
+      'text': 'echo don blame me' + text
     }
   })
 
-  console.info(events)
-
-  const ACCESS_TOKEN = process.env.ACCESS_TOKEN
-  const options = {
-    uri: 'https://api.line.me/v2/bot/message/reply',
-    method: 'POST',
-    body: {
-      replyToken,
-      messages
-    },
-    headers: {
-      'Authorization': `Bearer ${ACCESS_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    json: true
+  try {
+    await Message.reply(replyToken, messages)
+  } catch (e) {
+    next(e)
   }
-
-  request(options).catch(({ error }) => res.status(400).json(error))
-  res.status(200)
 }
