@@ -12,8 +12,6 @@ extends:
   - standard
 plugins:
   - import
-globals:
-  expect: false
 rules:
   no-console: warn
   comma-dangle: off
